@@ -1,12 +1,53 @@
-*.class
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
 *.jar
+!gradle-wrapper.jar
 *.war
 *.ear
+*.zip
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Java
+*.class
+
+# Testsql ignore
+/src/test/resources/database/JobExecutorTestData.sql
+
+# Build Artifacts
+.gradle/
+build/
+target/
+bin/
+dependency-reduced-pom.xml
+ 
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 
+
+# Eclipse Project Files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA Files
+*.iml
+*.ipr
+*.iws
+*.idea
+
+# NetBeans
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+*.rdb
