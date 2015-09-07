@@ -1,5 +1,8 @@
 package ch.woggle.rohonxi.view;
 
+import ch.woggle.rohonxi.alphabet.CustomAlphabet;
+import ch.woggle.rohonxi.generator.Generator;
+import ch.woggle.rohonxi.generator.SimpleRandomMatrixGenerator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -28,8 +31,11 @@ public class MainViewController {
 
   @FXML
   private void handleGenerate() {
-    output.appendText(availableCharacters.getText());
-    output.appendText("\n");
+    int width = Integer.parseInt(columns.getText());
+    int height = Integer.parseInt(rows.getText());
+    Generator gen = new SimpleRandomMatrixGenerator(width, height);
+    gen.setAlphabet(new CustomAlphabet(availableCharacters.getText()));
+    output.setText(gen.generate());
   }
 
   @FXML
