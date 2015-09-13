@@ -6,24 +6,61 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This alphabet can be used to create a custom alphabet with distinct characters (every character
+ * exists only once in the alphabet).
+ * <p>
+ * An alphabet can be created from a string, where every character contained in the string is a
+ * character of the alphabet.
+ * 
+ * @author Thomas Moser
+ *
+ */
 public class CustomDistinctAlphabet implements Alphabet {
+  private static final String DEFAULT_NAME = "Custom Distinct Alphabet";
+
   private char[] symbols;
   private String symbolString;
   private String alphabetName;
 
+  /**
+   * Create an empty alphabet without a name (Name will be set to {@value DEFAULT_NAME}).
+   * <p>
+   * Alphabet symbols can later be added using the {@code setSymbols} method.
+   */
   public CustomDistinctAlphabet() {
-    this("");
+    this("", DEFAULT_NAME);
   }
 
+  /**
+   * Create an alphabet with a String containing the symbols of this alphabet.
+   * <p>
+   * The name of the alphabet will be set to {@value DEFAULT_NAME}.
+   * 
+   * @param symbolString This String contains all the symbols that shall be available in this
+   *        alphabet.
+   */
   public CustomDistinctAlphabet(String symbolString) {
-    this(symbolString, "Custom Distinct Alphabet");
+    this(symbolString, DEFAULT_NAME);
   }
 
+  /**
+   * Create an alphabet with given symbols and a given name.
+   * 
+   * @param symbolString This String contains all the symbols that shall be available in this
+   *        alphabet.
+   * @param alphabetName The name used for this alphabet.
+   */
   public CustomDistinctAlphabet(String symbolString, String alphabetName) {
     this.alphabetName = alphabetName;
     extractSymbols(symbolString);
   }
 
+  /**
+   * Extract the symbols used for this alphabet from a string. Every symbol will be added only once.
+   * 
+   * @param symbolString The symbols used by this alphabet.
+   */
   private final void extractSymbols(String symbolString) {
     Set<Character> symbols = new HashSet<Character>();
 
@@ -44,6 +81,12 @@ public class CustomDistinctAlphabet implements Alphabet {
     this.symbolString = tmpSymbols.toString();
   }
 
+  /**
+   * Set the symbols used for this alphabet. Previously set symbols will be discarded.
+   * 
+   * @param symbolString This String contains all the symbols that will be available in this
+   *        alphabet.
+   */
   public void setSymbols(String symbolString) {
     extractSymbols(symbolString);
   }
@@ -65,7 +108,12 @@ public class CustomDistinctAlphabet implements Alphabet {
   }
 
   @Override
-  public String toString() {
+  public String getSymbolString() {
     return symbolString;
+  }
+
+  @Override
+  public String toString() {
+    return alphabetName + ": " + symbolString;
   }
 }
