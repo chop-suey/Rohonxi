@@ -52,6 +52,7 @@ public class MainViewController {
   private void initialize() {
     initializeAlphabetBox();
     initializeSpinners();
+    availableCharacters.setWrapText(true);
   }
 
   private void initializeSpinners() {
@@ -96,6 +97,20 @@ public class MainViewController {
         return null;
       }
     });
+
+    alphabets.getSelectionModel().selectedItemProperty()
+        .addListener((observable, oldValue, newValue) -> setSelectedAlphabet(newValue));
+    alphabets.getSelectionModel().select(0);
+
+  }
+
+  private void setSelectedAlphabet(Alphabet alphabet) {
+    if (alphabet.getClass() == CustomDistinctAlphabet.class) {
+      availableCharacters.setEditable(true);
+    } else {
+      availableCharacters.setEditable(false);
+      availableCharacters.setText(alphabet.getSymbolString());
+    }
   }
 
   private Alphabet getSelectedAlphabet() {
