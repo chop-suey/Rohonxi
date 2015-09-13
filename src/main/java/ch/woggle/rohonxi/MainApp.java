@@ -2,13 +2,14 @@ package ch.woggle.rohonxi;
 
 import java.io.IOException;
 
+import ch.woggle.rohonxi.view.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class MainApp extends Application {
   private Stage primaryStage;
 
   public static void main(String[] args) {
@@ -26,9 +27,12 @@ public class Main extends Application {
   private void showMainView() {
     try {
       FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(Main.class.getResource("view/MainView.fxml"));
+      loader.setLocation(MainApp.class.getResource("view/MainView.fxml"));
 
       AnchorPane pane = (AnchorPane) loader.load();
+
+      MainViewController controller = loader.getController();
+      controller.setMainApp(this);
 
       Scene scene = new Scene(pane);
       primaryStage.setScene(scene);
@@ -37,5 +41,9 @@ public class Main extends Application {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public Stage getPrimaryStage() {
+    return primaryStage;
   }
 }

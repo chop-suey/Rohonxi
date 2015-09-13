@@ -4,4 +4,6 @@ public interface Alphabet {
   public int size();
 
   public char get(int index);
+
+  public String getName();
 }

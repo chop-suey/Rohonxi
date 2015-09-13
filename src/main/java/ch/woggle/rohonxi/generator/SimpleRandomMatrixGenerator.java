@@ -18,6 +18,10 @@ public class SimpleRandomMatrixGenerator implements Generator {
 
   @Override
   public String generate() {
+    if (alphabet == null) {
+      return null;
+    }
+
     int alphabetSize = alphabet.size();
 
     StringBuilder matrix = new StringBuilder();
