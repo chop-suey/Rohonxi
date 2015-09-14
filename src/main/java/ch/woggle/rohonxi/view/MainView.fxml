@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="550.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.woggle.rohonxi.view.MainViewController">
+<AnchorPane prefHeight="550.0" prefWidth="500.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.woggle.rohonxi.view.MainViewController">
    <children>
       <GridPane layoutX="106.0" layoutY="45.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
@@ -45,7 +45,7 @@
                   <Button mnemonicParsing="false" onAction="#handleExport" text="Export..." />
               </buttons>
             </ButtonBar>
-            <TextArea fx:id="output" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <TextArea fx:id="output" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="outputText" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
