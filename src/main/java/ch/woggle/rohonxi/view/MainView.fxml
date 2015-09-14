@@ -35,13 +35,17 @@
                   <TextArea fx:id="availableCharacters" prefHeight="200.0" prefWidth="200.0" promptText="Enter your custom alphabet here..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Alphabet" />
                   <ChoiceBox fx:id="alphabets" prefHeight="26.0" prefWidth="429.0" GridPane.columnIndex="1" />
-                  <Spinner fx:id="columns" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Spinner fx:id="rows" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Spinner fx:id="columns" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Spinner fx:id="rows" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <ButtonBar prefHeight="58.0" prefWidth="490.0" GridPane.rowIndex="1">
               <buttons>
                 <Button mnemonicParsing="false" onAction="#handleGenerate" text="Generate" />
+                  <Button mnemonicParsing="false" onAction="#copyToClipboard" text="Copy">
+                     <tooltip>
+                        <Tooltip text="Copy to clipboard" />
+                     </tooltip></Button>
                   <Button mnemonicParsing="false" onAction="#handleExport" text="Export..." />
               </buttons>
             </ButtonBar>

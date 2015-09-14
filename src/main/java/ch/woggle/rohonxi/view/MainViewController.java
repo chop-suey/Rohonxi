@@ -1,6 +1,7 @@
 package ch.woggle.rohonxi.view;
 
 import ch.woggle.rohonxi.MainApp;
+import ch.woggle.rohonxi.alphabet.AlphaNumericAlphabet;
 import ch.woggle.rohonxi.alphabet.Alphabet;
 import ch.woggle.rohonxi.alphabet.AsciiAlphabet;
 import ch.woggle.rohonxi.alphabet.BinaryAlphabet;
@@ -21,6 +22,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
@@ -89,6 +92,7 @@ public class MainViewController {
     alphabetItems.add(new LatinAlphabet());
     alphabetItems.add(new LatinLcAlphabet());
     alphabetItems.add(new LatinUcAlphabet());
+    alphabetItems.add(new AlphaNumericAlphabet());
     alphabets.setItems(alphabetItems);
 
     alphabets.setConverter(new StringConverter<Alphabet>() {
@@ -160,6 +164,17 @@ public class MainViewController {
     SimpleTextExport txtExport =
         new SimpleTextExport(fileChooser.showSaveDialog(mainApp.getPrimaryStage()));
     txtExport.export(output.getText());
+  }
+
+  /**
+   * Copies the text from the output textarea to the system clipboard.
+   */
+  @FXML
+  private void copyToClipboard() {
+    final Clipboard clipboard = Clipboard.getSystemClipboard();
+    final ClipboardContent content = new ClipboardContent();
+    content.putString(output.getText());
+    clipboard.setContent(content);
   }
 
   /**
