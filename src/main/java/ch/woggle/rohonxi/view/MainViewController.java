@@ -24,6 +24,12 @@ import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
+/**
+ * Controller for the main view. manages generating and output of the random strings.
+ * 
+ * @author Thomas Moser
+ *
+ */
 public class MainViewController {
   private MainApp mainApp;
 
@@ -58,7 +64,6 @@ public class MainViewController {
   private void initializeSpinners() {
     setIntegerSpinnerFactory(rows, 5, 255, 20);
     setIntegerSpinnerFactory(columns, 5, 255, 20);
-
   }
 
   private static void setIntegerSpinnerFactory(Spinner<Integer> spinner, int min, int max,
@@ -69,7 +74,10 @@ public class MainViewController {
   }
 
   /**
-   * 
+   * Add alphabets to the alphabet choice box and add an the correct displayed name for the
+   * alphabets.
+   * <p>
+   * Add an observer to selections in the choicebox.
    */
   private void initializeAlphabetBox() {
     ObservableList<Alphabet> alphabetItems = FXCollections.observableArrayList();
@@ -104,6 +112,11 @@ public class MainViewController {
 
   }
 
+  /**
+   * This method is called if a selection has been made in the alphabet ChoiceBox.
+   * 
+   * @param alphabet The selected alphabet.
+   */
   private void setSelectedAlphabet(Alphabet alphabet) {
     if (alphabet.getClass() == CustomDistinctAlphabet.class) {
       availableCharacters.setEditable(true);
@@ -113,6 +126,9 @@ public class MainViewController {
     }
   }
 
+  /**
+   * @return the currently selected alphabet from the ChoiceBox
+   */
   private Alphabet getSelectedAlphabet() {
     Alphabet selected = alphabets.getSelectionModel().getSelectedItem();
     if (selected != null && selected.getClass() == CustomDistinctAlphabet.class) {
@@ -121,6 +137,9 @@ public class MainViewController {
     return selected;
   }
 
+  /**
+   * Generate a new random string from the selected alphabet with the selected size for the output.
+   */
   @FXML
   private void handleGenerate() {
     int width = columns.getValue();
@@ -130,6 +149,10 @@ public class MainViewController {
     output.setText(gen.generate());
   }
 
+  /**
+   * Handle the exportation of the generated output. At the moment the sole export possibility is to
+   * a simple text file.
+   */
   @FXML
   private void handleExport() {
     FileChooser fileChooser = new FileChooser();
@@ -139,6 +162,11 @@ public class MainViewController {
     txtExport.export(output.getText());
   }
 
+  /**
+   * Setter for the main app reference.
+   * 
+   * @param mainApp
+   */
   public void setMainApp(MainApp mainApp) {
     this.mainApp = mainApp;
   }
