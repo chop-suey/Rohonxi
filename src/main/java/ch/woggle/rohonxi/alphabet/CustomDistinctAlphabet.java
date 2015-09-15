@@ -52,6 +52,9 @@ public class CustomDistinctAlphabet implements Alphabet {
    * @param alphabetName The name used for this alphabet.
    */
   public CustomDistinctAlphabet(String symbolString, String alphabetName) {
+    if (symbolString == null) {
+      symbolString = "";
+    }
     this.alphabetName = alphabetName;
     extractSymbols(symbolString);
   }
@@ -96,8 +99,19 @@ public class CustomDistinctAlphabet implements Alphabet {
     return symbols.length;
   }
 
+  /**
+   * Return the character at the specified index. If index > alphabet.size(). Index will be
+   * calculated index % size.
+   * 
+   * @param index The index of the character to get
+   * @return The character at the specified index or 0 if the alphabet does not contain any
+   *         characters.
+   */
   @Override
   public char get(int index) {
+    if (symbols.length == 0) {
+      return 0;
+    }
     index = index % symbols.length;
     return symbols[index];
   }

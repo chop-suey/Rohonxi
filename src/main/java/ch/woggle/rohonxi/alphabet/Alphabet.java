@@ -18,7 +18,8 @@ public interface Alphabet {
    * 
    * @param index The index of the character to get.
    * 
-   * @return The character at the specified index.
+   * @return The character at the specified index. If the alphabet does not contain any characters
+   *         the return value is not defined.
    */
   public char get(int index);
 

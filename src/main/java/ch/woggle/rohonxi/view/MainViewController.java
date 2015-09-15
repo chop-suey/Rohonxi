@@ -14,11 +14,13 @@ import ch.woggle.rohonxi.alphabet.LatinUcAlphabet;
 import ch.woggle.rohonxi.export.SimpleTextExport;
 import ch.woggle.rohonxi.generator.Generator;
 import ch.woggle.rohonxi.generator.SimpleRandomMatrixGenerator;
+import ch.woggle.util.EntropyCalculator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TextArea;
@@ -58,15 +60,19 @@ public class MainViewController {
   private Button exportButton;
 
   @FXML
+  private Label entropyLabel;
+
+  @FXML
   private void initialize() {
     initializeAlphabetBox();
     initializeSpinners();
     availableCharacters.setWrapText(true);
+    calculateEntropy();
   }
 
   private void initializeSpinners() {
-    setIntegerSpinnerFactory(rows, 5, 255, 20);
-    setIntegerSpinnerFactory(columns, 5, 255, 20);
+    setIntegerSpinnerFactory(rows, 1, 255, 20);
+    setIntegerSpinnerFactory(columns, 1, 255, 20);
   }
 
   private static void setIntegerSpinnerFactory(Spinner<Integer> spinner, int min, int max,
@@ -117,6 +123,16 @@ public class MainViewController {
   }
 
   /**
+   * Calculate the shannon entropy of the text contained in the output TextArea and display the
+   * calculated value in the entropyLabel.
+   */
+  private void calculateEntropy() {
+    String text = output.getText();
+    double entropy = EntropyCalculator.stringEntropy(text, true);
+    entropyLabel.setText(String.format("%.6f", entropy));
+  }
+
+  /**
    * This method is called if a selection has been made in the alphabet ChoiceBox.
    * 
    * @param alphabet The selected alphabet.
@@ -151,6 +167,7 @@ public class MainViewController {
     Generator gen = new SimpleRandomMatrixGenerator(width, height);
     gen.setAlphabet(getSelectedAlphabet());
     output.setText(gen.generate());
+    calculateEntropy();
   }
 
   /**
